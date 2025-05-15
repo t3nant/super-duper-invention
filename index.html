@@ -1,1 +1,40 @@
-<h1>Hello!</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.cdnfonts.com/css/neuropol-x" rel="stylesheet">
+</head>
+<body>
+    <div class="task-container">
+        <h1>Daily Task Tracker</h1>
+        <div class="task-view">
+            <button id="prevTask">⬆ Scroll Up</button>
+            <div class="task-list">
+                <p id="current-task" class="highlighted-task">Task Name Here</p>
+            </div>
+            <button id="nextTask">⬇ Scroll Down</button>
+        </div>
+        
+        <div class="controls">
+            <button id="startTask">Start Task</button>
+            <button id="completeTask">Task Completed</button>
+            <div class="timer">
+                <p id="mainTimer">00:00:00</p>
+            </div>
+        </div>
+
+        <button id="auxTask">Auxiliary Task</button>
+        <div class="aux-container hidden">
+            <p>Auxiliary Task Active</p>
+            <p id="auxTimer">00:00:00</p>
+            <input type="text" id="auxDescription" placeholder="Describe auxiliary task">
+            <button id="completeAuxTask">Complete Auxiliary Task</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
