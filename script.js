@@ -1,11 +1,20 @@
-let tasks = ["Vacuum Floor", "Stock Restrooms", "Empty Trash", "Sweep Sidewalk"];
-let taskIndex = 0;
-let mainTimer, auxTimer, auxActive = false;
+let tasks = ["Vacuum Floors", "Stock Restrooms", "Empty Trash", "Sweep Sidewalk"];
+let taskIndex = 1;
+let mainTimer, auxTimer;
 let mainSeconds = 0, auxSeconds = 0;
 
 // Update task display
 function updateTask() {
-    document.getElementById("current-task").textContent = tasks[taskIndex];
+    let taskItems = document.querySelectorAll('.task-item');
+    taskItems.forEach((item, index) => {
+        item.textContent = tasks[index];
+        if (index === taskIndex) {
+            item.classList.add("highlighted-task");
+        } else {
+            item.classList.remove("highlighted-task");
+            item.style.color = "#888"; // Grey out previous tasks
+        }
+    });
 }
 
 // Scroll through tasks
@@ -39,16 +48,16 @@ document.getElementById("startTask").addEventListener("click", () => {
 // Complete task
 document.getElementById("completeTask").addEventListener("click", () => {
     stopMainTimer();
-    document.getElementById("current-task").style.color = "#888"; // Grey out
-    if (taskIndex < tasks.length - 1) taskIndex++;
-    updateTask();
+    if (taskIndex < tasks.length - 1) {
+        taskIndex++;
+        updateTask();
+    }
 });
 
 // Auxiliary task handling
 document.getElementById("auxTask").addEventListener("click", () => {
     stopMainTimer();
     document.querySelector(".aux-container").classList.remove("hidden");
-    auxActive = true;
     auxTimer = setInterval(() => {
         auxSeconds++;
         document.getElementById("auxTimer").textContent = new Date(auxSeconds * 1000).toISOString().substr(11, 8);
@@ -59,8 +68,8 @@ document.getElementById("auxTask").addEventListener("click", () => {
 document.getElementById("completeAuxTask").addEventListener("click", () => {
     clearInterval(auxTimer);
     document.querySelector(".aux-container").classList.add("hidden");
-    document.getElementById("auxTimer").textContent = "00:00:00";
     auxSeconds = 0;
+    document.getElementById("auxTimer").textContent = "00:00:00";
     startMainTimer();
 });
 
